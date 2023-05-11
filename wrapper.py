@@ -72,8 +72,7 @@ class Client:
 
     def lowerByte(self, byte):
         byteString = byte.decode()
-        byteLower = byteString.lower().encode()
-        return byteLower
+        return byteString.lower().encode()
 
     def send(self, sock, data):
         sock.sendall(data)
@@ -88,10 +87,10 @@ class Client:
     def parseHeaders(self, headers):
         if headers is None:
             return ""
-        headersRequest = ""
-        for headerType, headerValue in headers.items():
-            headersRequest += f"{headerType}: {headerValue}\r\n"
-        return headersRequest
+        return "".join(
+            f"{headerType}: {headerValue}\r\n"
+            for headerType, headerValue in headers.items()
+        )
 
     def get(self, resource, headers=None):
         headers = self.parseHeaders(headers)
